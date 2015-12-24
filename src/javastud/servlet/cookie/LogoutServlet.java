@@ -18,7 +18,7 @@ public class LogoutServlet extends HttpServlet {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 
-		request.getRequestDispatcher("html/link.html").include(request, response);
+		request.getRequestDispatcher("clink.html").include(request, response);
 
 		Cookie ck = new Cookie("name", "");
 		ck.setMaxAge(0);

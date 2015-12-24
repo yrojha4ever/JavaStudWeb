@@ -17,18 +17,27 @@ public class ProfileServlet extends HttpServlet {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 
-		request.getRequestDispatcher("html/link.html").include(request, response);
+		request.getRequestDispatcher("clink.html").include(request, response);
 
 		Cookie ck[] = request.getCookies();
 		if (ck != null) {
-			String name = ck[0].getValue();
-			if (!name.equals("") || name != null) {
+			
+			String name = null;
+			for (int i = 0; i < ck.length; i++) {
+				Cookie cke = ck[i];
+				if(cke.getName().equals("name")){
+					name = cke.getValue();
+					break;
+				}
+			}
+			
+			if (name != null && !name.equals("")) {
 				out.print("<b>Welcome to Profile</b>");
 				out.print("<br>Welcome, " + name);
 			}
 		} else {
 			out.print("Please login first");
-			request.getRequestDispatcher("html/login.html").include(request,
+			request.getRequestDispatcher("clogin.html").include(request,
 					response);
 		}
 		out.close();

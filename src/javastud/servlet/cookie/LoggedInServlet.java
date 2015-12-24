@@ -16,7 +16,7 @@ public class LoggedInServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		resp.sendRedirect("html/index.html");
+		resp.sendRedirect("cindex.html");
 	}
 
 	protected void doPost(HttpServletRequest request,
@@ -24,7 +24,7 @@ public class LoggedInServlet extends HttpServlet {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 
-		//request.getRequestDispatcher("html/link.html").include(request, response);
+		request.getRequestDispatcher("clink.html").include(request, response);
 
 		String name = request.getParameter("name");
 		String password = request.getParameter("password");
@@ -37,7 +37,7 @@ public class LoggedInServlet extends HttpServlet {
 			response.addCookie(ck);
 		} else {
 			out.print("sorry, username or password error!");
-			out.print("<a href='LoggedInServlet'>Back to Login</a>");
+			request.getRequestDispatcher("clogin.html").include(request, response); 
 		}
 
 		out.close();
