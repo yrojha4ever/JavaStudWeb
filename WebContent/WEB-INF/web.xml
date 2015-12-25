@@ -85,4 +85,13 @@
     <servlet-name>ServletContextSetAttribute</servlet-name>
     <url-pattern>/setAttribute</url-pattern>
   </servlet-mapping>
+  <filter>
+    <display-name>LogFilter</display-name>
+    <filter-name>LogFilter</filter-name>
+    <filter-class>javastud.servlet.filter.LogFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>LogFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
 </web-app>
