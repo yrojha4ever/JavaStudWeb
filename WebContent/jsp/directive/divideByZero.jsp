@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -7,8 +7,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<%
-		out.print("Hello " + session.getAttribute("username"));
-	%>
+
+10/ 2 is: <%= 10/2 %>
+<hr>
+
+<%@ page errorPage="errorpage.jsp" %>
+500/0 is: <%= 500/0 %>
+
 </body>
 </html>
