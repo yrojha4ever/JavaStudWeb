@@ -35,16 +35,7 @@ public class JstlCoreCSendAttr extends HttpServlet {
 		List<String> richCountries = Arrays.asList("Usa","China","Japan","UK","Norway");
 		request.setAttribute("richCountries", richCountries);
 		
-		request.getRequestDispatcher("jsp/jstl/jstlExample.jsp").forward(request, response);
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		request.getRequestDispatcher("jsp/jstl/jstlCore.jsp").forward(request, response);
 	}
 
 	private Employee getEmployee() {
