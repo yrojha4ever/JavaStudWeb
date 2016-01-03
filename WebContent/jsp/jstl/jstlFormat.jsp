@@ -14,7 +14,11 @@
 
 	<!-- Date Formatting. -->
 	<c:set var="todayDate" value="<%= new java.util.Date()%>"/>	
-	Today Date is: <fmt:formatDate pattern="yyyy-MM-dd" value="${todayDate}" />
+	Today Date: ${todayDate } <br/>
+	Today Formatted Date is (1): <fmt:formatDate pattern="yyyy-MM-dd" value="${todayDate}" />
+	
+	<br/>Formatted Date (2):<fmt:formatDate type="date" value="${todayDate}"/>
+	<br/>Formatted Date (3):<fmt:formatDate type="time" value="${todayDate}"/>
 	
 	
 	<!-- Currency Formatting -->

@@ -16,7 +16,7 @@
 
 <c:set var="msgString" value="Welcome to Java web! JSTL functions."/>
 
-<hr/> 1. fn:contains() <br/>
+<hr/> 1. fn:contains() : fn:contains(msgString, 'Java')<br/>
 <c:if test="${fn:contains(msgString, 'Java')}">
    'Java' is found in: '${msgString}'
 </c:if>

@@ -15,10 +15,9 @@ public class WithoutSessionServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		resp.setContentType("text/html");
 		
 		HttpSession session = req.getSession();
-		session.setMaxInactiveInterval(5);
+		session.setMaxInactiveInterval(10);
 		session.setAttribute("currentUser", "ADMIN");
 		
 		PrintWriter out = resp.getWriter();

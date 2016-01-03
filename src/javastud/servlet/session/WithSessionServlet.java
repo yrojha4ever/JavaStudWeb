@@ -15,13 +15,14 @@ public class WithSessionServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		
 		HttpSession session = req.getSession();
 		String cuser = (String)session.getAttribute("currentUser");
 		
 		PrintWriter out = resp.getWriter();
 		out.println(" Hello : " + cuser);
 		
-		out.println("<hr>User is fetch from Sessoin. session.getAttribute(\"currentUser\")...");
+		out.println("<hr>User is fetch from Session. session.getAttribute(\"currentUser\")...");
 		
 	}
 }
