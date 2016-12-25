@@ -9,27 +9,20 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  
-  <!-- Servlet Context -->
   <context-param>
-  	<param-name>companyName</param-name>
-  	<param-value>ORACLE</param-value>
+    <param-name>companyName</param-name>
+    <param-value>ORACLE</param-value>
   </context-param>
-  
   <servlet>
-  	<servlet-name>ContextServlet</servlet-name>
-  	<servlet-class>javastud.servlet.ContextServlet</servlet-class>
-  	<!-- Servlet Config: Local -->
-  	<init-param>
-  		<param-name>server</param-name>
-  		<param-value>TOMCAT7</param-value>
-  	</init-param>
+    <servlet-name>ContextServlet</servlet-name>
+    <servlet-class>javastud.servlet.ContextServlet</servlet-class>
+    <init-param>
+      <param-name>server</param-name>
+      <param-value>TOMCAT7</param-value>
+    </init-param>
   </servlet>
-  
   <servlet-mapping>
-  	<servlet-name>ContextServlet</servlet-name>
-  	<url-pattern>/context</url-pattern>
+    <servlet-name>ContextServlet</servlet-name>
+    <url-pattern>/context</url-pattern>
   </servlet-mapping>
-  
-  
 </web-app>

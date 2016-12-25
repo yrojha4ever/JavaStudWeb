@@ -1,92 +1,86 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-   
-<!-- 1. This line is needed to import JSTL core feature. Make sure you have jstl-1.2.jar library in web-inf lib folder. -->
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
- 
+    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
-<body>	
+<body>
 
-<hr/> 1. c:out <br/> 
-<!-- It is just like JSP expression tag but it is used for exression. It renders data to the page. -->
-<c:out value="${employee.address.city }"></c:out> <br/>
-Employee Name is John: <c:out value="${employee.name == 'John' }"></c:out> <br/>
-<%-- Does not work: <c:out value="${new java.util.Date() }"></c:out> --%>
-<%-- <%= new java.util.Date() %> It does not work in c:out. --%>
-<%= new java.util.Date() %>
+	<hr> 1. out <br/>
+	<c:out value="5040"></c:out>
+	
+	<hr> 2. set <br/>
+	<c:set var="salary" value="10000" />
+	The salary is: <c:out value="${salary }"></c:out>
+	
+	<c:remove var="salary"/>
+	
+	<hr> 3. if <br/>
+	<c:set var="salary" value="15000"/>
+	<c:if test="${salary > 5000 }">
+		<p> My salary is: ${salary } </p>
+	</c:if>
+	
+	<hr> 4. choose, when, otherwise <br/>
+	<c:set var="salary" value="15000" />
 
-<hr/>2. c:set   <br/><!-- c:set  tag is JSTL-friendly version of the setProperty action.-->
-<c:set var="salary" scope="session" value="${5000*2}"/>
-Salary is: <c:out value="${salary}"/>	
+	<c:choose>
+		<c:when test="${salary <= 5000 }">
+			<p> Salary is Very low to survive: ${salary } </p>
+		</c:when>
+		<c:when test="${salary ge 10000 }">
+			<strong> Salary is Very Good: ${salary } </strong>
+		</c:when>
+		<c:otherwise>
+			Good Salary: ${salary }
+		</c:otherwise>
+	</c:choose>
 
-<hr/> 3. c:remove  <br/><!-- c:remove tag removes a variable from either a specified scope or the first scope.-->
-<c:remove var="salary"/>
-<p>After Salary Removed from Session: ${salary} <br/>
+	<hr> 5. For each loop <br/>
+	<%request.setAttribute("countries", new String[]{"Nepal", "USA", "China", "Japan"});%>
 
-<hr> 4. c:catch <br/>
-<c:catch var ="excep">
-   <% int x = 5/0;%>
-</c:catch>
-Exception is: ${excep }
+	<c:forEach var="country" items="${countries }">
+		<strong> ${country } </strong>  <br/>
+	</c:forEach>
 
-<%-- OR put in if statement: <c:if test = "${excep != null}">
-   <p>The exception is : ${excep} <br />
-   There is an exception: ${excep.message}</p>
-</c:if> --%>
 
-<hr> 5. c:if It tests the condition.  <br/>
-<c:set var="salary" value="${5000*2}"/>
-<c:if test="${salary > 4000}">   <!-- or salary gt 4000 -->
-   <p>My salary is: ${salary} <p> <!-- OR <c:out value="${salary}"/> -->
-</c:if><br/>
+	<br/>FORMAT::>>>>>>>>Date : <%= new java.util.Date() %>  <br/>
+	
+	<c:set var="todayDate" value="<%= new java.util.Date() %>" />
+	
+	Today date is: <fmt:formatDate value="${todayDate }" pattern="yyyy-MM-dd"/>
+	
+	<p> Currency in USA
+		<fmt:setLocale value="en_US"/>
+		<fmt:formatNumber type="currency" value="1500000.4592"/>
+	</p>
 
-<c:if test="${employee.name ne null && employee.name eq 'John' }">
-	Employee Name is: ${employee.name }
-</c:if>
 
-<hr> 6. c:choose,c:when,c:otherwise:  <br/>
-<c:set var="salary" scope="session" value="${5000*2}"/>
-<p>Your salary is : Rs.${salary}</p>
-<c:choose>
-    <c:when test="${salary <= 5000}">
-       Salary is very low to survive: ${salary }
-    </c:when>
-    <c:when test="${salary > 10000}">
-        Salary is very good: ${salary }
-    </c:when>
-    <c:otherwise>
-        Good Salary: ${salary }
-    </c:otherwise>
-</c:choose>
+		<hr/> FUNCTIONS>>>>>>>>><br/>
+	
+	<c:set var="msg" value="Welcome to Java Web! JSTL Functions!"/>
+	
+	<hr/> 1. contains <br/>
+	${fn:contains(msg, 'Java Web') } <br/>
+	
+	${fn:containsIgnoreCase(msg, 'jstl') } <br/>
+	
+	<c:if test="${fn:contains(msg, 'Java Web') }">
+		<strong> Java Web is found in above message variable. </strong>
+	</c:if>
 
-<hr> 7. c:import : tag provides all of the functionality of the <include> action but also allows for inclusion of absolute URLs.<br/>
-<c:import url="../directive/employeeDetail.jsp"/>
+	<hr> Length: ${fn:length(msg) }
+	<hr> ${fn:toUpperCase(msg) }
+	<hr> ${fn:toLowerCase(msg) }
 
-<%-- <c:import var="data" url="http://www.google.com"/>
-<c:out value="${data}"/> --%>
 
-<hr> 8. c:foreach: <br/>
-<u>Rich Countries: </u><br/>
-<c:forEach var="richCountry" items="${richCountries}">
-	${richCountry} <br/>
-</c:forEach>
-
-<br/> 9. For Tokens: <br/>
-<c:forTokens items="Ram,Shyam,Hari" delims="," var="name">
-   <c:out value="${name}"/><br/>
-</c:forTokens>
-
-<hr> 10. c:redirect = response.sendRedirect<br/>
-<%-- <c:redirect url="http://www.google.com"/> --%>
-
-<hr> 11. c:url: tag formats a URL into a string and stores it into a variable. This tag automatically performs URL rewriting when necessary. <br/>
-<a href="<c:url value="/jsp/index.jsp"/>">TEST(Url rewriting)</a>  <br/>
-<a href="/jsp/index.jsp">TEST(without url rewriting. using)</a>
 
 
 
